@@ -1,5 +1,6 @@
 ---
 - name: webserver roles for practice 
   hosts: all
+  become: true
   roles:
     - webserver

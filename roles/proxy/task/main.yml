@@ -1,0 +1,17 @@
+---
+- name: installing pkgs
+  package:
+    name: httpd
+    state: present
+
+- name: moving proxy file 
+  src: file/proxy.conf
+  dest: /etc/httpd/conf.d/proxy.conf
+
+- name: moving proxy file 
+  src: file/index.html
+  dest: /var/www/html/index.html 
+
+- name : start service
+  service : httpd
+  state: started

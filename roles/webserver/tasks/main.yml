@@ -1,2 +1,28 @@
 ---
-# tasks file for webserver
+- name: installing pkgs
+  package:
+    name: httpd
+    state: present
+
+- name: Download CSS template
+  ansible.builtin.get_url:
+    url: https://www.free-css.com/assets/files/free-css-templates/download/page285/bitcypo.zip
+    dest: /var/www/html/
+
+- name: Unarchive CSS template
+  ansible.builtin.unarchive:
+    src: /var/www/html/bitcypo.zip
+    dest: /var/www/html/
+    remote_src: yes
+
+# - name: copy CSS file 
+#   ansible.builtin.template:
+#     src: /var/www/html/bitcypo-html/*
+#     dest: /var/www/html
+
+- name: Start service apache, if not started
+  ansible.builtin.service:
+    name: httpd
+    state: started
+    
+  

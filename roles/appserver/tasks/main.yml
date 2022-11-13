@@ -6,6 +6,7 @@
   loop:
     - httpd
     - java
+    - my-sql
       # - epel
 
 - name: epel-release

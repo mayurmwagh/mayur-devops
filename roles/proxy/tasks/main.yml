@@ -6,12 +6,12 @@
 
 - name: moving proxy file 
   ansible.builtin.copy:
-    src: roles/proxy/files/file/proxy.conf
+    src: files/proxy.conf
     dest: /etc/httpd/conf.d/proxy.conf
 
 - name: moving proxy file 
   ansible.builtin.copy:
-    src: roles/proxy/files/file/index.html
+    src: files/index.html
     dest: /var/www/html/index.html 
 
 - name: Start service httpd, if not started

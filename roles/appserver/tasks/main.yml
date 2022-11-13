@@ -6,7 +6,7 @@
   loop:
     - httpd
     - java
-    - my-sql
+    - mysql
       # - epel
 
 - name: epel-release
@@ -33,28 +33,30 @@
     src: templates/context.xml
     dest: "{{TC_Dir}}/conf/context.xml"
 
-- name: Set httpd_can_network_connect flag on and keep it persistent across reboots
-  ansible.posix.seboolean:
-    name: httpd_can_network_connect
-    state: yes
-    persistent: yes
+# - name: Set httpd_can_network_connect flag on and keep it persistent across reboots
+#   ansible.posix.seboolean:
+#     name: httpd_can_network_connect
+#     state: yes
+#     persistent: yes
 
     # temperary start
-    #- name : start tomcat
-    # shell: sh {{TC_Dir}}/bin/catalina.sh start
+- name : start tomcat
+  shell: sh {{TC_Dir}}/bin/catalina.sh start
 
-    #permanent start
-- name : tomcat daemons
-  copy:
-    src: files/tomcat-init
-    dest: /etc/init.d/tomcat
-    mode: 0755
 
-- name: daemon reload
-  shell: systemctl daemon-reload
 
-- name: start tomcat
-  service:
-    name: tomcat
-    state: started
-    enabled: true
+#     #permanent start
+# - name : tomcat daemons
+#   copy:
+#     src: files/tomcat-init
+#     dest: /etc/init.d/tomcat
+#     mode: 0755
+
+# - name: daemon reload
+#   shell: systemctl daemon-reload
+
+# - name: start tomcat
+#   service:
+#     name: tomcat
+#     state: started
+#     enabled: true

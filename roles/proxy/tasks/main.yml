@@ -9,7 +9,7 @@
     src: files/proxy.conf
     dest: /etc/httpd/conf.d/proxy.conf
 
-- name: moving proxy file 
+- name: moving index file 
   ansible.builtin.copy:
     src: files/index.html
     dest: /var/www/html/index.html 

@@ -17,10 +17,26 @@
     dest: /mnt/
     remote_src: yes
 
-- name: Download foo.conf
+- name: student file
   ansible.builtin.get_url:
     url: "{{S3_bkt}}"
     dest: "{{TC_Dir}}/webapps/"
+
+- name: jdbc connector
+  ansible.builtin.copy:
+    url: files/mysql-connector.jar.j2
+    dest: "{{TC_Dir}}/lib/mysql-connector.jar"
+
+- name: Template a file to /etc/file.conf
+  ansible.builtin.template:
+    src: templates/context.xml
+    dest: "{{TC_Dir}}/conf/context.xml"
+
+- name: Set httpd_can_network_connect flag on and keep it persistent across reboots
+  ansible.posix.seboolean:
+    name: httpd_can_network_connect
+    state: yes
+    persistent: yes
 
     # temperary start
     #- name : start tomcat

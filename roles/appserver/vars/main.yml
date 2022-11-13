@@ -1,2 +1,4 @@
----
-# vars file for appserver
+TC_url: "https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.83/bin/apache-tomcat-8.5.83.zip"
+TC_last: "{{TC_url.split('/') | last}}"
+TC_Dir: "/mnt/{{TC_last | regex_replace('.zip','')}}"
+S3_bkt: "https://kattapa.s3.ap-northeast-1.amazonaws.com/student.war"

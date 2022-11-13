@@ -1,2 +1,43 @@
 ---
-# tasks file for appserver
+- name: installing pkgs
+  ansible.builtin.package:
+    name: "{{item}}"
+    state: present
+  loop:
+    - httpd
+    - java
+      # - epel
+
+- name: epel-release
+  shell: amazon-linux-extras install epel -y
+
+- name: Extract tomcat 8
+  ansible.builtin.unarchive:
+    src: "{{TC_url}}"
+    dest: /mnt/
+    remote_src: yes
+
+- name: Download foo.conf
+  ansible.builtin.get_url:
+    url: "{{S3_bkt}}"
+    dest: "{{TC_Dir}}/webapps/"
+
+    # temperary start
+    #- name : start tomcat
+    # shell: sh {{TC_Dir}}/bin/catalina.sh start
+
+    #permanent start
+- name : tomcat daemons
+  copy:
+    src: files/tomcat-init
+    dest: /etc/init.d/tomcat
+    mode: 0755
+
+- name: daemon reload
+  shell: systemctl daemon-reload
+
+- name: start tomcat
+  service:
+    name: tomcat
+    state: started
+    enabled: true

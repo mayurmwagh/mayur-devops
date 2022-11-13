@@ -3,5 +3,7 @@
   hosts: all
   become: true
   roles:
-    - webserver
+    #- webserver
     - proxy
+    - appserver
+

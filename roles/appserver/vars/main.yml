@@ -4,5 +4,5 @@ TC_Dir: "/mnt/{{TC_last | regex_replace('.zip','')}}"
 S3_bkt: "https://kattapa.s3.ap-northeast-1.amazonaws.com/student.war"
 DB_user: admin
 DB_pass: admin123
-DB_ENDPOINT: database-1.cluster-cudcom5lnxxp.eu-north-1.rds.amazonaws.com
-DB_name: studentapp
+DB_ENDPOINT: database-1.cudcom5lnxxp.eu-north-1.rds.amazonaws.com
+DB_name: students
